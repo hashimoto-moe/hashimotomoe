@@ -1,18 +1,18 @@
 <html>
  <head>
-	<meta charset = "utf=8">
+	<meta charset = "utf-8">
 	<title>mission_4-1</title>
  </head>
 
 <?php
 
-//ƒf[ƒ^ƒx[ƒXÚ‘±
-$dsn = 'ƒf[ƒ^ƒx[ƒX'; 
-$user = 'ƒ†[ƒU[–¼'; 
-$password = 'ƒpƒXƒ[ƒh'; 
+//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶š
+$dsn = 'ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹'; 
+$user = 'ãƒ¦ãƒ¼ã‚¶ãƒ¼å'; 
+$password = 'ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰'; 
 $pdo = new PDO($dsn, $user, $password,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
 
-//ƒe[ƒuƒ‹ì¬
+//ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆ
 $sql = "CREATE TABLE IF NOT EXISTS tbtest8" 
 ." (" 
 . "id INT," 
@@ -25,47 +25,47 @@ $cnt = $pdo -> prepare("SELECT COUNT(*)FROM tbtest8");
 $cnt -> execute();
 $count = ($cnt->fetchColumn()+1);
 
-//íœ‹@”\
-if(!empty($_POST["Sakujo"]) and !empty($_POST["Pass2"]) and !empty($_POST["Delete"])){//‚à‚µíœ”Ô†‚ª‘—M‚³‚ê‚½‚ç
-	//Pass2‚ÆSakujo”Ô†‚ª³‚µ‚¢ƒyƒA‚©’²‚×‚é
-	$id = $_POST["Sakujo"];//$id‚Éíœ‘ÎÛ”Ô†‚ð“ü‚ê‚é
+//å‰Šé™¤æ©Ÿèƒ½
+if(!empty($_POST["Sakujo"]) and !empty($_POST["Pass2"]) and !empty($_POST["Delete"])){//ã‚‚ã—å‰Šé™¤ç•ªå·ãŒé€ä¿¡ã•ã‚ŒãŸã‚‰
+	//Pass2ã¨Sakujoç•ªå·ãŒæ­£ã—ã„ãƒšã‚¢ã‹èª¿ã¹ã‚‹
+	$id = $_POST["Sakujo"];//$idã«å‰Šé™¤å¯¾è±¡ç•ªå·ã‚’å…¥ã‚Œã‚‹
 	$pass = $_POST["Pass2"];
-	$sql = 'SELECT*FROM tbtest8 ORDER BY id';//order by ‚Í•À‚×‚Ü‚·‚æ
+	$sql = 'SELECT*FROM tbtest8 ORDER BY id';//order by ã¯ä¸¦ã¹ã¾ã™ã‚ˆ
 //	$stmt = $pdo->prepare($sql);
 //	$stmt -> bindParam(':id',$id,PDO::PARAM_INT);
 //	$stmt -> bindParam(':pass',$pass, PDO::PARAM_STR);
-	$results = $pdo->query($sql);//query‚ÍMySQL(ƒf[ƒ^ƒx[ƒXã)‚ÅŽÀs‚µ‚Ü‚·‚æ
+	$results = $pdo->query($sql);//queryã¯MySQL(ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ä¸Š)ã§å®Ÿè¡Œã—ã¾ã™ã‚ˆ
 	foreach ($results as $row){
-		if($row['id']==$_POST["Sakujo"] and $row['pass']==$_POST["Pass2"]){//id‚ÆSakujo‚ªˆê@ŠŽ‚Â@pass‚ÆPass2‚ªˆê‚È‚ç
-			$sql = 'delete from tbtest8 where id=:id';//ƒfƒŠ[ƒg‚ÌêŠŽw’è
-			$stmt = $pdo->prepare($sql);//sql€”õ
-			$stmt -> bindParam(':id',$id, PDO::PARAM_INT);//bindParam‚Å”Ô†ƒJƒ‰ƒ€Žw’èA
+		if($row['id']==$_POST["Sakujo"] and $row['pass']==$_POST["Pass2"]){//idã¨SakujoãŒä¸€ç·’ã€€ä¸”ã¤ã€€passã¨Pass2ãŒä¸€ç·’ãªã‚‰
+			$sql = 'delete from tbtest8 where id=:id';//ãƒ‡ãƒªãƒ¼ãƒˆã®å ´æ‰€æŒ‡å®š
+			$stmt = $pdo->prepare($sql);//sqlæº–å‚™
+			$stmt -> bindParam(':id',$id, PDO::PARAM_INT);//bindParamã§ç•ªå·ã‚«ãƒ©ãƒ æŒ‡å®šã€
 			$stmt->execute();//execute
 		}
 	}
 }
 
-//•ÒW‹@”\
-if(!empty($_POST["Hensyu"]) and !empty($_POST["Pass3"]) and !empty($_POST["Edit"])){//•ÒW‘ÎÛ”Ô†‚É”Žš‚ª“ü‚Á‚Ä‚¢‚ÄƒpƒXƒ[ƒh‚ª“ü—Í‚³‚ê‚Ä‚éŽž
+//ç·¨é›†æ©Ÿèƒ½
+if(!empty($_POST["Hensyu"]) and !empty($_POST["Pass3"]) and !empty($_POST["Edit"])){//ç·¨é›†å¯¾è±¡ç•ªå·ã«æ•°å­—ãŒå…¥ã£ã¦ã„ã¦ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒå…¥åŠ›ã•ã‚Œã¦ã‚‹æ™‚
 	$id = $_POST["Hensyu"];
 	$pass = $_POST["PAss3"];
-	$sql = 'SELECT*FROM tbtest8 ORDER BY id';//$_POST["Hensyu"]‚Æ“¯‚¶”Ô†‚Ìid—ñ‚ð”²‚«o‚·
+	$sql = 'SELECT*FROM tbtest8 ORDER BY id';//$_POST["Hensyu"]ã¨åŒã˜ç•ªå·ã®idåˆ—ã‚’æŠœãå‡ºã™
 //	$stmt = $pdo->prepare($sql); 
 //	$stmt -> bindParam(':id', $id, PDO::PARAM_STR);
 //	$stmt -> bindParam(':pass', $pass, PDO::PARAM_STR);
 //	$stmt -> execute();
-	$results = $pdo->query($sql);//”z—ñ‚É‚·‚éiphp‚Å‚¢‚¤fileŠÖ”j 
+	$results = $pdo->query($sql);//é…åˆ—ã«ã™ã‚‹ï¼ˆphpã§ã„ã†fileé–¢æ•°ï¼‰ 
 	foreach ($results as $row){
-		if($row['id']==$_POST["Hensyu"] and $row['pass']==$_POST["Pass3"]){//”Ô†ˆê’v@ŠŽ‚Â@ƒpƒXˆê’v
-			$postname = $row['name'];//Value•Ï”‚ÉŠeƒJƒ‰ƒ€‚ª‹L“ü‚³‚ê‚é
+		if($row['id']==$_POST["Hensyu"] and $row['pass']==$_POST["Pass3"]){//ç•ªå·ä¸€è‡´ã€€ä¸”ã¤ã€€ãƒ‘ã‚¹ä¸€è‡´
+			$postname = $row['name'];//Valueå¤‰æ•°ã«å„ã‚«ãƒ©ãƒ ãŒè¨˜å…¥ã•ã‚Œã‚‹
 			$postcomment = $row['comment'];
 			$postpass1 = $row['pass'];
 			$postkakusu = $row['id'];
 		}
 	}
  }
-//•ÒW‚µ‚Ä‘‚«’¼‚·
-if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Pass1"]) and !empty($_POST["Kakusu"]) and !empty($_POST["Sousin"])){//Kakusu‚É•ÒW‘ÎÛ”Ô†‚ª“ü‚Á‚Ä‚¢‚éŽž
+//ç·¨é›†ã—ã¦æ›¸ãç›´ã™
+if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Pass1"]) and !empty($_POST["Kakusu"]) and !empty($_POST["Sousin"])){//Kakusuã«ç·¨é›†å¯¾è±¡ç•ªå·ãŒå…¥ã£ã¦ã„ã‚‹æ™‚
 	$sql = 'SELECT*FROM tbtest8 ORDER BY id';
 	$results = $pdo->query($sql);
 //	foreach($results as $row){
@@ -73,8 +73,8 @@ if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Pass1
 		$name = $_POST["Name"]; 
 		$comment = $_POST["Comment"];
 		$pass = $_POST["Pass1"];
-//		if($row['id']==$_POST["Kakusu"] and $row['pass']==$_POST["Pass1"]){//hidden‚Æid‚ªˆê’v@ŠŽ‚Âpass‚P‚Æpass‚ªˆê’v
-			$sql = "update tbtest8 set name='$name',comment='$comment', pass='$pass' where id=$id";//""‚Í•Ï”‚ðŠÜ‚Þ
+//		if($row['id']==$_POST["Kakusu"] and $row['pass']==$_POST["Pass1"]){//hiddenã¨idãŒä¸€è‡´ã€€ä¸”ã¤passï¼‘ã¨passãŒä¸€è‡´
+			$sql = "update tbtest8 set name='$name',comment='$comment', pass='$pass' where id=$id";//""ã¯å¤‰æ•°ã‚’å«ã‚€
 //			$stmt = $pdo -> prepare($sql); 
 //			$stmt -> bindParam(':name', $name, PDO::PARAM_STR); 
 //			$stmt -> bindParam(':comment', $comment, PDO::PARAM_STR);
@@ -85,16 +85,16 @@ if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Pass1
 //		}
 	}
 
-//ƒe[ƒuƒ‹‚Éƒf[ƒ^‚ð‘ã“ü
-if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Sousin"]) and empty($_POST["Kakusu"]) and !empty($_POST{"Sousin"})){//‚à‚µ–¼‘O‚ÆƒRƒƒ“ƒg‚Æ‘—M‚ªempty‚Å‚È‚¢‚È‚ç
-	$sql = $pdo -> prepare("INSERT INTO tbtest8 (id,name, comment,pass) VALUES (:id, :name, :comment, :pass)"); //prepareF–¼‘O‚ÆƒRƒƒ“ƒg‚ÌƒJƒ‰ƒ€‚ð‘}‚µž‚Þ
+//ãƒ†ãƒ¼ãƒ–ãƒ«ã«ãƒ‡ãƒ¼ã‚¿ã‚’ä»£å…¥
+if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Sousin"]) and empty($_POST["Kakusu"]) and !empty($_POST{"Sousin"})){//ã‚‚ã—åå‰ã¨ã‚³ãƒ¡ãƒ³ãƒˆã¨é€ä¿¡ãŒemptyã§ãªã„ãªã‚‰
+	$sql = $pdo -> prepare("INSERT INTO tbtest8 (id,name, comment,pass) VALUES (:id, :name, :comment, :pass)"); //prepareï¼šåå‰ã¨ã‚³ãƒ¡ãƒ³ãƒˆã®ã‚«ãƒ©ãƒ ã‚’æŒ¿ã—è¾¼ã‚€
 	$sql -> bindParam(':id',$id,PDO::PARAM_INT);
-	$sql -> bindParam(':name', $name, PDO::PARAM_STR); //bindParamF–¼‘OƒJƒ‰ƒ€‚ð•\‹L‚É 
-	$sql -> bindParam(':comment', $comment, PDO::PARAM_STR);//bindParamFƒRƒƒ“ƒgƒJƒ‰ƒ€‚ð•\‹L‚É
+	$sql -> bindParam(':name', $name, PDO::PARAM_STR); //bindParamï¼šåå‰ã‚«ãƒ©ãƒ ã‚’ï¼„è¡¨è¨˜ã« 
+	$sql -> bindParam(':comment', $comment, PDO::PARAM_STR);//bindParamï¼šã‚³ãƒ¡ãƒ³ãƒˆã‚«ãƒ©ãƒ ã‚’ï¼„è¡¨è¨˜ã«
 	$sql -> bindParam(':pass', $pass, PDO::PARAM_STR);
 	$id = $count;
-	$name = $_POST["Name"];//$•\‹L‚É‘—M‚³‚ê‚½–¼‘O‚ð‘ã“ü
-	$comment = $_POST["Comment"];//$•\‹L‚É‘—M‚³‚ê‚½ƒRƒƒ“ƒg‚ð‘ã“ü
+	$name = $_POST["Name"];//$è¡¨è¨˜ã«é€ä¿¡ã•ã‚ŒãŸåå‰ã‚’ä»£å…¥
+	$comment = $_POST["Comment"];//$è¡¨è¨˜ã«é€ä¿¡ã•ã‚ŒãŸã‚³ãƒ¡ãƒ³ãƒˆã‚’ä»£å…¥
 	$pass = $_POST["Pass1"];
 	$sql -> execute();
 	}
@@ -104,26 +104,26 @@ if(!empty($_POST["Name"]) and !empty($_POST["Comment"]) and !empty($_POST["Sousi
  <body>
 	<form action = "mission_4.php" method = "POST">
 
-	<input type = "text" name = "Name" Placeholder = "–¼‘O" Value = "<?php echo $postname ?>"><br>
-	<input type = "text" name = "Comment" Placeholder ="ƒRƒƒ“ƒg" Value = "<?php echo $postcomment ?>"><br>
-	<input type = "text" name = "Pass1" Placeholder = "ƒpƒXƒ[ƒh" Value = "<?php echo $postpass1 ?>"><br>
+	<input type = "text" name = "Name" Placeholder = "åå‰" Value = "<?php echo $postname ?>"><br>
+	<input type = "text" name = "Comment" Placeholder ="ã‚³ãƒ¡ãƒ³ãƒˆ" Value = "<?php echo $postcomment ?>"><br>
+	<input type = "text" name = "Pass1" Placeholder = "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰" Value = "<?php echo $postpass1 ?>"><br>
 
 	<input type = "hidden" name = "Kakusu" Value = "<?php echo $postkakusu ?>">
 
-	<input type = "submit" name = "Sousin" Value = "‘—M"><br><br>
+	<input type = "submit" name = "Sousin" Value = "é€ä¿¡"><br><br>
 
-	<input type = "text" name = "Sakujo" Placeholder = "íœ‘ÎÛ”Ô†"><br>
-	<input type = "text" name = "Pass2" Placeholder = "ƒpƒXƒ[ƒh"><br>
+	<input type = "text" name = "Sakujo" Placeholder = "å‰Šé™¤å¯¾è±¡ç•ªå·"><br>
+	<input type = "text" name = "Pass2" Placeholder = "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰"><br>
 
-	<input type = "submit" name = "Delete" Value = "íœ"><br><br>
+	<input type = "submit" name = "Delete" Value = "å‰Šé™¤"><br><br>
 
-	<input type = "text" name = "Hensyu" Placeholder = "•ÒW‘ÎÛ”Ô†"><br>
-	<input type = "text" name = "Pass3" Placeholder = "ƒpƒXƒ[ƒh"><br>
+	<input type = "text" name = "Hensyu" Placeholder = "ç·¨é›†å¯¾è±¡ç•ªå·"><br>
+	<input type = "text" name = "Pass3" Placeholder = "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰"><br>
 
-	<input type = "submit" name = "Edit" Value = "•ÒW"><br>
+	<input type = "submit" name = "Edit" Value = "ç·¨é›†"><br>
 
 <?php
-//“ü—Í‚³‚ê‚½ƒf[ƒ^‚ðselect‚É‚æ‚Á‚Ä•\Ž¦
+//å…¥åŠ›ã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚’selectã«ã‚ˆã£ã¦è¡¨ç¤º
 $sql = 'SELECT * FROM tbtest8'; 
 $stmt = $pdo->query($sql); 
 $results = $stmt->fetchAll(); 
